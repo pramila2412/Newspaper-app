@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Light Theme (default) ─── */
+body {
+  font-family: 'Inter', 'Roboto', system-ui, sans-serif;
+  color: #333333;
+  background-color: #F5F0E8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Dark Theme ─── */
+.dark body,
+body.dark {
+  color: #E8E6F0;
+  background-color: #0F0B2E;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1A1545;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4B3F8A;
+}
+
+/* ─── Breaking News Ticker ─── */
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.ticker-animate {
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-animate:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Block Editor Styles ─── */
+.block-content h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.block-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.block-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.block-content p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.block-content blockquote {
+  border-left: 4px solid #2D5016;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  background: #f0f7eb;
+  font-style: italic;
+}
+
+.dark .block-content blockquote {
+  border-left-color: #7C3AED;
+  background: #1A1545;
+}
+
+.block-content .bible-verse {
+  background: linear-gradient(135deg, #f0f7eb 0%, #e6f1e0 100%);
+  border-left: 4px solid #2D5016;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+.dark .block-content .bible-verse {
+  background: linear-gradient(135deg, #1A1545 0%, #231E56 100%);
+  border-left-color: #7C3AED;
+}
+
+.block-content .callout {
+  background: #fef7e7;
+  border: 1px solid #f0d68a;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+}
+
+.dark .block-content .callout {
+  background: #231E56;
+  border-color: #4B3F8A;
+}
+
+.block-content hr {
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 2rem 0;
+}
+
+.block-content ul,
+.block-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.block-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+/* ─── Card Hover ─── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Scroll to Top ─── */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ─── Line Clamp ─── */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
