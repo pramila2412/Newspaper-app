@@ -3,6 +3,7 @@ import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom';
 import { HiOutlineMenu, HiOutlineX, HiOutlineSearch, HiOutlineMoon, HiOutlineSun, HiOutlineChevronUp, HiOutlineMail, HiChevronDown } from 'react-icons/hi';
 import { useTheme } from '../context/ThemeContext';
 import { discoverAPI, subscribersAPI } from '../api/services';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 interface NavItem {
     label: string;
@@ -163,10 +164,10 @@ const PublicLayout: React.FC = () => {
     const toggleMobileDropdown = (label: string) => setMobileExpanded(prev => prev === label ? null : label);
 
     return (
-        <div className="min-h-screen flex flex-col bg-white dark:bg-[#0c0c1d] transition-colors duration-300">
+        <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F172A] transition-colors duration-300">
 
             {/* ═══════ TOP UTILITY BAR ═══════ */}
-            <div className="bg-gray-50 dark:bg-[#08081a] border-b border-gray-200 dark:border-white/5">
+            <div className="bg-slate-50 dark:bg-[#0B1120] border-b border-slate-200 dark:border-slate-700/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9">
                     <div className="flex gap-4 text-[11px] text-gray-500 dark:text-gray-500">
                         <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -174,6 +175,7 @@ const PublicLayout: React.FC = () => {
                     <div className="flex items-center gap-4">
                         <Link to="/about" className="text-[11px] text-gray-500 dark:text-gray-500 hover:text-[#1CA7A6] transition-colors">About</Link>
                         <Link to="/contact" className="text-[11px] text-gray-500 dark:text-gray-500 hover:text-[#1CA7A6] transition-colors">Contact</Link>
+                        <LanguageSwitcher />
                         <button onClick={toggleTheme} className="flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-500 hover:text-[#1CA7A6] transition-colors">
                             {theme === 'dark' ? <><HiOutlineSun size={13} /> Light</> : <><HiOutlineMoon size={13} /> Dark</>}
                         </button>
@@ -182,14 +184,14 @@ const PublicLayout: React.FC = () => {
             </div>
 
             {/* ═══════ LOGO HEADER ═══════ */}
-            <header className="bg-white dark:bg-[#0c0c1d] border-b border-gray-100 dark:border-white/5">
+            <header className="bg-white dark:bg-[#0F172A] border-b border-slate-100 dark:border-slate-700/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-5">
                     <Link to="/" className="flex flex-col">
                         <div className="flex items-baseline gap-1">
                             <span className="text-[#1CA7A6] text-3xl sm:text-4xl font-black italic leading-none">Online</span>
                             <span className="text-gray-900 dark:text-white text-3xl sm:text-4xl font-black leading-none">Goodnews</span>
                         </div>
-                        <span className="text-[10px] text-gray-400 dark:text-gray-600 tracking-[0.3em] uppercase font-medium mt-1">Christian News Portal</span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 tracking-[0.3em] uppercase font-medium mt-1">Christian News Portal</span>
                     </Link>
 
                     {/* Right: Ad space or CTA */}
@@ -202,7 +204,7 @@ const PublicLayout: React.FC = () => {
             </header>
 
             {/* ═══════ NAVIGATION BAR ═══════ */}
-            <nav className="sticky top-0 z-50 bg-gradient-to-r from-[#0B3C5D] to-[#0e4a72] dark:from-[#0D0924] dark:to-[#15103a] shadow-lg">
+            <nav className="sticky top-0 z-50 bg-gradient-to-r from-[#0B3C5D] to-[#0e4a72] dark:from-[#0F172A] dark:to-[#1E293B] shadow-lg">
                 {/* Teal accent line */}
                 <div className="h-[3px] bg-gradient-to-r from-[#1CA7A6] via-[#22c9c8] to-[#1CA7A6]" />
 
@@ -236,7 +238,7 @@ const PublicLayout: React.FC = () => {
 
                 {/* Search overlay */}
                 {searchOpen && (
-                    <div className="bg-[#0a3250] dark:bg-[#0a0820] border-t border-white/10">
+                    <div className="bg-[#0a3250] dark:bg-[#0B1120] border-t border-white/10">
                         <div className="max-w-7xl mx-auto px-4 py-3">
                             <form onSubmit={handleSearch} className="flex gap-2">
                                 <input
@@ -257,7 +259,7 @@ const PublicLayout: React.FC = () => {
 
                 {/* Mobile menu */}
                 {menuOpen && (
-                    <div className="lg:hidden bg-[#0a3250] dark:bg-[#0a0820] border-t border-white/10 max-h-[70vh] overflow-y-auto">
+                    <div className="lg:hidden bg-[#0a3250] dark:bg-[#0B1120] border-t border-white/10 max-h-[70vh] overflow-y-auto">
                         <div className="px-4 py-2">
                             {navItems.map(item => (
                                 <div key={item.label}>
@@ -311,12 +313,12 @@ const PublicLayout: React.FC = () => {
             )}
 
             {/* ═══════ CONTENT ═══════ */}
-            <main className="flex-1 bg-gray-50 dark:bg-[#0c0c1d]">
+            <main className="flex-1 bg-slate-50 dark:bg-[#0F172A]">
                 <Outlet />
             </main>
 
             {/* ═══════ FOOTER ═══════ */}
-            <footer className="bg-[#0B3C5D] dark:bg-[#08081a] text-gray-300">
+            <footer className="bg-[#0B3C5D] dark:bg-[#020617] text-slate-300">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                         {/* Brand */}

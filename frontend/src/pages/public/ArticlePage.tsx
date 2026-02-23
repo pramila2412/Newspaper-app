@@ -14,11 +14,11 @@ const ArticlePage: React.FC = () => {
     }, [slug]);
 
     if (loading) {
-        return <div className="flex justify-center py-24"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary dark:border-dpurple"></div></div>;
+        return <div className="flex justify-center py-24"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1CA7A6]"></div></div>;
     }
 
     if (!article) {
-        return <div className="text-center py-24 text-gray-400 text-lg">Article not found</div>;
+        return <div className="text-center py-24 text-slate-400 text-lg">Article not found</div>;
     }
 
     const shareUrl = window.location.href;
@@ -27,22 +27,22 @@ const ArticlePage: React.FC = () => {
     return (
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Breadcrumbs */}
-            <nav className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 mb-6 flex-wrap">
-                <Link to="/" className="hover:text-primary dark:hover:text-dpurple-300 transition-colors">Home</Link>
+            <nav className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 mb-6 flex-wrap">
+                <Link to="/" className="hover:text-[#1CA7A6] transition-colors">Home</Link>
                 <HiOutlineChevronRight size={14} />
                 {article.categoryId && (
                     <>
-                        <Link to={`/category/${article.categoryId._id}`} className="hover:text-primary dark:hover:text-dpurple-300 transition-colors">{article.categoryId.name}</Link>
+                        <Link to={`/category/${article.categoryId._id}`} className="hover:text-[#1CA7A6] transition-colors">{article.categoryId.name}</Link>
                         <HiOutlineChevronRight size={14} />
                     </>
                 )}
-                <span className="text-gray-700 dark:text-gray-300 line-clamp-1">{article.title}</span>
+                <span className="text-slate-700 dark:text-slate-300 line-clamp-1">{article.title}</span>
             </nav>
 
             {/* Category + Meta */}
-            <div className="flex flex-wrap items-center gap-3 mb-4 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap items-center gap-3 mb-4 text-sm text-slate-500 dark:text-slate-400">
                 {article.categoryId && (
-                    <span className="flex items-center gap-1 text-primary dark:text-dpurple-300 bg-primary/10 dark:bg-dpurple/20 px-2 py-0.5 rounded font-medium">
+                    <span className="flex items-center gap-1 text-[#1CA7A6] bg-[#1CA7A6]/10 px-2 py-0.5 rounded font-medium">
                         <HiOutlineTag size={14} /> {article.categoryId.name}
                     </span>
                 )}
@@ -51,12 +51,12 @@ const ArticlePage: React.FC = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-800 dark:text-white leading-tight mb-3">{article.title}</h1>
-            {article.subtitle && <p className="text-lg text-gray-500 dark:text-gray-400 mb-6">{article.subtitle}</p>}
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-800 dark:text-white leading-tight mb-3">{article.title}</h1>
+            {article.subtitle && <p className="text-lg text-slate-500 dark:text-slate-400 mb-6">{article.subtitle}</p>}
 
             {/* Author */}
             {article.authorId && (
-                <p className="text-sm text-gray-400 dark:text-gray-500 mb-6">By <span className="font-medium text-gray-700 dark:text-gray-300">{article.authorId.name}</span></p>
+                <p className="text-sm text-slate-400 dark:text-slate-500 mb-6">By <span className="font-medium text-slate-700 dark:text-slate-300">{article.authorId.name}</span></p>
             )}
 
             {/* Hero Image */}
@@ -70,15 +70,15 @@ const ArticlePage: React.FC = () => {
             </div>
 
             {/* Share Buttons */}
-            <div className="border-t border-cream-300 dark:border-dpurple-900/40 mt-12 pt-6">
-                <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Share this article</p>
+            <div className="border-t border-slate-200 dark:border-slate-700/50 mt-12 pt-6">
+                <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">Share this article</p>
                 <div className="flex flex-wrap gap-2">
                     <a href={`https://wa.me/?text=${shareText}`} target="_blank" rel="noopener noreferrer" className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors">WhatsApp</a>
                     <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">Facebook</a>
                     <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer" className="bg-sky-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-sky-600 transition-colors">Twitter</a>
                     <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" className="bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors">LinkedIn</a>
                     <a href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent(article.title)}`} target="_blank" rel="noopener noreferrer" className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">Pinterest</a>
-                    <button onClick={() => window.print()} className="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors">Print</button>
+                    <button onClick={() => window.print()} className="bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-700 transition-colors">Print</button>
                 </div>
             </div>
 

@@ -192,7 +192,21 @@ export const getPublicNewsByCategory = async (req: Request, res: Response): Prom
         const limit = parseInt(req.query.limit as string) || 20;
         const skip = (page - 1) * limit;
 
-        const filter = { status: NewsStatus.PUBLISHED, categoryId: req.params.categoryId };
+        let categoryId = req.params.categoryId;
+
+        // Support slug-based lookup: if param is not a valid ObjectId, treat as slug
+        const isObjectId = /^[0-9a-fA-F]{24}$/.test(categoryId);
+        if (!isObjectId) {
+            const { Category } = require('../models/Category');
+            const cat = await Category.findOne({ slug: categoryId });
+            if (!cat) {
+                res.json({ news: [], total: 0, page, totalPages: 0 });
+                return;
+            }
+            categoryId = cat._id.toString();
+        }
+
+        const filter = { status: NewsStatus.PUBLISHED, categoryId };
 
         const [news, total] = await Promise.all([
             News.find(filter).populate('categoryId', 'name slug').populate('authorId', 'name').sort({ publishedAt: -1 }).skip(skip).limit(limit),

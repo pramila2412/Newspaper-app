@@ -1,17 +1,78 @@
 <!DOCTYPE html>
-<html lang="ml">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="GoodNews - Malayalam Christian Newspaper Portal" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <title>GoodNews - Malayalam Christian Newspaper</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GoodNews - Malayalam Christian Newspaper Portal" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <title>GoodNews - Malayalam Christian Newspaper</title>
+
+  <style>
+    /* Aggressively hide ALL Google Translate UI elements */
+    .goog-te-banner-frame,
+    .skiptranslate,
+    #goog-gt-tt,
+    .goog-te-balloon-frame,
+    .goog-tooltip,
+    .goog-tooltip:hover,
+    .goog-te-gadget-icon,
+    .goog-te-spinner-pos,
+    iframe.goog-te-banner-frame {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+
+    body {
+      top: 0 !important;
+    }
+
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+  </style>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ml',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      }, 'google_translate_element');
+    }
+
+    // Forcibly remove the Google Translate banner after it loads
+    function hideGoogleTranslateBar() {
+      var frames = document.querySelectorAll('.goog-te-banner-frame, iframe.goog-te-banner-frame');
+      frames.forEach(function (f) { f.style.display = 'none'; f.remove(); });
+      var skips = document.querySelectorAll('.skiptranslate');
+      skips.forEach(function (s) { s.style.display = 'none'; });
+      document.body.style.top = '0px';
+    }
+    // Run repeatedly to catch late-loading banner
+    setInterval(hideGoogleTranslateBar, 500);
+  </script>
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+  <div id="google_translate_element" style="display:none;height:0;overflow:hidden;"></div>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

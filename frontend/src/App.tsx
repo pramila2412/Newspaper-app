@@ -41,7 +41,7 @@ import SearchPage from './pages/public/SearchPage';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { isAuthenticated, loading } = useAuth();
-    if (loading) return <div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary dark:border-dpurple"></div></div>;
+    if (loading) return <div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1CA7A6]"></div></div>;
     if (!isAuthenticated) return <Navigate to="/admin/login" replace />;
     return <>{children}</>;
 };
