@@ -55,6 +55,7 @@ export const obituaryAPI = {
     update: (id: string, data: any) => api.patch(`/obituary/${id}`, data),
     delete: (id: string) => api.delete(`/obituary/${id}`),
     publicList: (params?: any) => api.get('/obituary/public', { params }),
+    publicById: (id: string) => api.get(`/obituary/public/${id}`),
 };
 
 // Media

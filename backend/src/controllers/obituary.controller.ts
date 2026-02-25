@@ -96,3 +96,21 @@ export const getPublicObituaries = async (req: Request, res: Response): Promise<
         res.status(500).json({ message: 'Server error' });
     }
 };
+export const getPublicObituaryById = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const obituary = await Obituary.findOneAndUpdate(
+            { _id: req.params.id, status: ObituaryStatus.ACTIVE },
+            { $inc: { viewCount: 1 } },
+            { new: true }
+        );
+
+        if (!obituary) {
+            res.status(404).json({ message: 'Obituary not found' });
+            return;
+        }
+
+        res.json(obituary);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};

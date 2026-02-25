@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
             setFeatured(featRes.data || []);
             setPopular(popRes.data || []);
             setTags(tagRes.data || []);
-            setObituary(obRes.data.obituaries || []);
+            setObituary(obRes.data.items || []);
             setClassifieds(clRes.data.classifieds || []);
         }).catch(() => { }).finally(() => setLoading(false));
     }, []);
@@ -210,12 +210,12 @@ const HomePage: React.FC = () => {
                                 <h3 className="font-bold text-slate-800 dark:text-white mb-3 text-sm uppercase tracking-wider">Follow Us</h3>
                                 <div className="grid grid-cols-2 gap-2">
                                     {[
-                                        { name: 'Facebook', color: 'bg-blue-600' },
-                                        { name: 'Twitter', color: 'bg-sky-500' },
-                                        { name: 'Instagram', color: 'bg-pink-500' },
-                                        { name: 'YouTube', color: 'bg-red-600' },
+                                        { name: 'Facebook', color: 'bg-blue-600', href: 'https://www.facebook.com/goodnews24x7/' },
+                                        { name: 'X (Twitter)', color: 'bg-gray-800', href: 'https://x.com/onlinegoodnews' },
+                                        { name: 'Instagram', color: 'bg-pink-500', href: 'https://www.instagram.com/onlinegoodnews/?hl=en' },
+                                        { name: 'LinkedIn', color: 'bg-[#0A66C2]', href: 'https://in.linkedin.com/company/online-goodnews' },
                                     ].map(s => (
-                                        <a key={s.name} href="#" className={`${s.color} text-white text-xs font-medium py-2 px-3 rounded-lg text-center hover:opacity-90 transition-opacity`}>
+                                        <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className={`${s.color} text-white text-xs font-medium py-2 px-3 rounded-lg text-center hover:opacity-90 transition-opacity`}>
                                             {s.name}
                                         </a>
                                     ))}
@@ -298,11 +298,24 @@ const HomePage: React.FC = () => {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             {obituaries.map((o: any) => (
-                                <div key={o._id} className="bg-slate-50 dark:bg-[#0F172A] rounded-xl border border-slate-200 dark:border-slate-700/50 p-4">
-                                    {o.photo && <img src={o.photo} alt={o.name} className="w-full h-36 object-cover rounded-lg mb-3" />}
-                                    <h4 className="font-semibold text-slate-800 dark:text-white text-sm">{o.name}</h4>
-                                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{o.age && `Age ${o.age}`} {o.place && `• ${o.place}`}</p>
-                                </div>
+                                <Link key={o._id} to={`/obituary/${o._id}`} className="group bg-slate-50 dark:bg-[#0F172A] rounded-xl border border-slate-200 dark:border-slate-700/50 overflow-hidden hover:shadow-lg dark:hover:shadow-black/20 transition-all flex flex-col">
+                                    {o.photo ? (
+                                        <img src={o.photo} alt={o.name} className="w-full h-40 object-cover" loading="lazy" />
+                                    ) : (
+                                        <div className="w-full h-40 bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+                                            <span className="text-3xl text-slate-400 dark:text-slate-600">✝</span>
+                                        </div>
+                                    )}
+                                    <div className="p-4 flex flex-col flex-1">
+                                        <h4 className="font-bold text-slate-800 dark:text-white text-base group-hover:text-[#1CA7A6] transition-colors line-clamp-2 mb-1">{o.name}</h4>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{o.age && `Age ${o.age}`} {o.district && `• ${o.district}`}</p>
+
+                                        <div className="mt-auto pt-3 border-t border-slate-200 dark:border-slate-700/50 flex items-center justify-between text-xs text-slate-400">
+                                            <span>{new Date(o.deathDate).toLocaleDateString('ml-IN', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                                            <span className="flex items-center gap-1"><HiOutlineEye size={12} /> {o.viewCount || 0}</span>
+                                        </div>
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

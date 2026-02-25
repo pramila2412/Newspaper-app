@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createObituary, updateObituary, deleteObituary, listObituaries, getPublicObituaries } from '../controllers/obituary.controller';
+import { createObituary, updateObituary, deleteObituary, listObituaries, getPublicObituaries, getPublicObituaryById } from '../controllers/obituary.controller';
 import { authenticate, authorize } from '../middlewares/auth';
 import { UserRole } from '../models/User';
 
@@ -7,6 +7,7 @@ const router = Router();
 
 // Public
 router.get('/public', getPublicObituaries);
+router.get('/public/:id', getPublicObituaryById);
 
 // Protected
 router.use(authenticate);

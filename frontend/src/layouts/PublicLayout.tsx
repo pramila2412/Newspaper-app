@@ -332,12 +332,12 @@ const PublicLayout: React.FC = () => {
                             </p>
                             <div className="flex gap-2.5 mt-5">
                                 {[
-                                    { letter: 'f', bg: 'bg-[#1877F2]' },
-                                    { letter: '𝕏', bg: 'bg-gray-800' },
-                                    { letter: 'in', bg: 'bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888]' },
-                                    { letter: '▶', bg: 'bg-[#FF0000]' },
+                                    { letter: 'f', bg: 'bg-[#1877F2]', href: 'https://www.facebook.com/goodnews24x7/' },
+                                    { letter: '𝕏', bg: 'bg-gray-800', href: 'https://x.com/onlinegoodnews' },
+                                    { letter: 'in', bg: 'bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888]', href: 'https://www.instagram.com/onlinegoodnews/?hl=en' },
+                                    { letter: 'Li', bg: 'bg-[#0A66C2]', href: 'https://in.linkedin.com/company/online-goodnews' },
                                 ].map((s, i) => (
-                                    <a key={i} href="#" className={`w-9 h-9 rounded-full ${s.bg} flex items-center justify-center text-[11px] text-white font-bold hover:scale-110 transition-transform`}>
+                                    <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className={`w-9 h-9 rounded-full ${s.bg} flex items-center justify-center text-[11px] text-white font-bold hover:scale-110 transition-transform`}>
                                         {s.letter}
                                     </a>
                                 ))}

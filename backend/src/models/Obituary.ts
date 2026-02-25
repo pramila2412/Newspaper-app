@@ -15,6 +15,7 @@ export interface IObituary extends Document {
     photo: string;
     contentBlocks: IContentBlock[];
     status: ObituaryStatus;
+    viewCount: number;
     createdBy: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
@@ -42,6 +43,7 @@ const ObituarySchema = new Schema<IObituary>(
         photo: { type: String, default: '' },
         contentBlocks: [ContentBlockSchema],
         status: { type: String, enum: Object.values(ObituaryStatus), default: ObituaryStatus.DRAFT },
+        viewCount: { type: Number, default: 0 },
         createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     },
     { timestamps: true }

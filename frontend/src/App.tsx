@@ -32,6 +32,7 @@ import CategoryPage from './pages/public/CategoryPage';
 import ArticlePage from './pages/public/ArticlePage';
 import PublicMatrimonyPage from './pages/public/PublicMatrimonyPage';
 import PublicObituaryPage from './pages/public/PublicObituaryPage';
+import PublicObituaryDetailPage from './pages/public/PublicObituaryDetailPage';
 import ClassifiedsPage from './pages/public/ClassifiedsPage';
 import VideosPage from './pages/public/VideosPage';
 import PrayersPage from './pages/public/PrayersPage';
@@ -60,6 +61,7 @@ const App: React.FC = () => {
                             <Route path="/article/:slug" element={<ArticlePage />} />
                             <Route path="/matrimony" element={<PublicMatrimonyPage />} />
                             <Route path="/obituary" element={<PublicObituaryPage />} />
+                            <Route path="/obituary/:id" element={<PublicObituaryDetailPage />} />
                             <Route path="/classifieds" element={<ClassifiedsPage />} />
                             <Route path="/videos" element={<VideosPage />} />
                             <Route path="/prayers" element={<PrayersPage />} />
