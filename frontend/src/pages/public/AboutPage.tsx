@@ -2,12 +2,12 @@ import React from 'react';
 import { HiOutlineGlobeAlt, HiOutlineLightBulb, HiOutlineHeart, HiOutlineUserGroup, HiOutlineBookOpen, HiOutlineStar } from 'react-icons/hi';
 
 const teamMembers = [
-    { name: 'C V Mathew', role: 'Founder & Chief Editor' },
-    { name: 'T M Mathew', role: 'Senior Editor' },
-    { name: 'Shaji Maniyat', role: 'Editor' },
-    { name: 'Wesly Mathew', role: 'Editor' },
-    { name: 'Saji Mathai Kathettu', role: 'Editor' },
-    { name: 'Jessy Shajan', role: 'Editor' },
+    { name: 'C V Mathew', role: 'Founder & Chief Editor', photo: '/images/team-1.png' },
+    { name: 'T M Mathew', role: 'Senior Editor', photo: '/images/team-2.png' },
+    { name: 'Shaji Maniyat', role: 'Editor', photo: '/images/team-3.png' },
+    { name: 'Wesly Mathew', role: 'Editor', photo: '/images/team-4.png' },
+    { name: 'Saji Mathai Kathettu', role: 'Editor', photo: '/images/team-5.png' },
+    { name: 'Jessy Shajan', role: 'Editor', photo: '/images/team-6.png' },
 ];
 
 const values = [
@@ -91,8 +91,8 @@ const AboutPage: React.FC = () => (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                     {teamMembers.map((member, i) => (
                         <div key={i} className="text-center group">
-                            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#0B3C5D] to-[#1CA7A6] mx-auto mb-3 flex items-center justify-center text-white text-xl sm:text-2xl font-bold shadow-lg group-hover:scale-105 transition-transform">
-                                {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                                <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
                             </div>
                             <h4 className="font-bold text-slate-800 dark:text-white text-xs sm:text-sm">{member.name}</h4>
                             <p className="text-[11px] text-slate-400 mt-0.5">{member.role}</p>

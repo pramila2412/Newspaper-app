@@ -61,7 +61,7 @@ const ArticlePage: React.FC = () => {
 
             {/* Hero Image */}
             {article.heroImage && (
-                <img src={article.heroImage} alt={article.title} className="w-full rounded-xl object-cover max-h-[500px] mb-8" />
+                <img src={article.heroImage} alt={article.title} className="w-full rounded-xl object-cover max-h-[500px] mb-8" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             )}
 
             {/* Content */}

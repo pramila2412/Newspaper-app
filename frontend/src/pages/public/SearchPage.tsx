@@ -41,7 +41,7 @@ const SearchPage: React.FC = () => {
                     {results.map((r: any) => (
                         <Link key={r._id} to={`/article/${r.slug}`} className="flex gap-4 bg-white dark:bg-[#1E293B] rounded-xl border border-slate-200 dark:border-slate-700/50 p-4 hover:shadow-lg dark:hover:shadow-black/20 transition-shadow group">
                             {r.heroImage ? (
-                                <img src={r.heroImage} alt="" className="w-24 h-24 rounded-lg object-cover shrink-0" />
+                                <img src={r.heroImage} alt="" className="w-24 h-24 rounded-lg object-cover shrink-0" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                             ) : (
                                 <div className="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700/50 shrink-0 flex items-center justify-center">
                                     <HiOutlineNewspaper size={24} className="text-slate-400" />

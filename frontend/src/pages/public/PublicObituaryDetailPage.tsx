@@ -45,13 +45,12 @@ const PublicObituaryDetailPage: React.FC = () => {
 
             <div className="bg-white dark:bg-[#1E293B] rounded-xl border border-slate-200 dark:border-slate-700/50 overflow-hidden shadow-sm mb-12">
                 {/* Large Image */}
-                {obituary.photo ? (
-                    <img src={obituary.photo} alt={obituary.name} className="w-full max-h-[500px] object-cover" />
-                ) : (
-                    <div className="w-full h-64 bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-                        <span className="text-4xl text-slate-300 dark:text-slate-600">✝</span>
-                    </div>
-                )}
+                <img
+                    src={obituary.photo || '/images/obituary-1.png'}
+                    alt={obituary.name}
+                    className="w-full max-h-[500px] object-cover"
+                    onError={(e) => { (e.target as HTMLImageElement).src = '/images/obituary-1.png'; }}
+                />
 
                 <div className="p-6 sm:p-8">
                     {/* Header Info */}
@@ -85,11 +84,7 @@ const PublicObituaryDetailPage: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {relatedPosts.map((post) => (
                             <Link key={post._id} to={`/article/${post.slug}`} className="group bg-white dark:bg-[#1E293B] rounded-xl border border-slate-200 dark:border-slate-700/50 overflow-hidden hover:shadow-lg dark:hover:shadow-black/20 transition-all">
-                                {post.heroImage ? (
-                                    <img src={post.heroImage} alt={post.title} className="w-full h-32 object-cover" />
-                                ) : (
-                                    <div className="w-full h-32 bg-slate-100 dark:bg-slate-800" />
-                                )}
+                                <img src={post.heroImage || `/images/obituary-${(relatedPosts.indexOf(post) % 4) + 1}.png`} alt={post.title} className="w-full h-32 object-cover" onError={(e) => { (e.target as HTMLImageElement).src = `/images/obituary-${(relatedPosts.indexOf(post) % 4) + 1}.png`; }} />
                                 <div className="p-4">
                                     <h3 className="font-bold text-slate-800 dark:text-white text-sm line-clamp-2 group-hover:text-[#1CA7A6] transition-colors">{post.title}</h3>
                                     <p className="text-xs text-slate-400 mt-2">{new Date(post.publishedAt).toLocaleDateString()}</p>

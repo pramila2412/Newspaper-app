@@ -182,12 +182,12 @@ async function main() {
     // ─── 7. Videos ───
     await Video.deleteMany({});
     const videoData = [
-        { title: 'Sunday Worship Service - February 2026', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', desc: 'Live worship service from Good News Church, Kottayam' },
-        { title: 'Pastor Samuel\'s Sermon: Walking in Grace', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', desc: 'A powerful message about God\'s grace in our daily lives' },
-        { title: 'Youth Conference 2025 Highlights', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', desc: 'Best moments from the Kerala Youth Christian Conference' },
-        { title: 'Malayalam Worship Songs - Krupayude Daham', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', desc: 'Beautiful Malayalam Christian worship song collection' },
-        { title: 'How to Study the Bible Effectively', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', desc: 'Practical tips for daily Bible study from Rev. Thomas' },
-        { title: 'Testimony: From Darkness to Light', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', desc: 'An incredible testimony of transformation and redemption' },
+        { title: 'Sunday Worship Service - February 2026', url: 'https://www.youtube.com/watch?v=nQWFzMvCfLE', desc: 'Live worship service from Good News Church, Kottayam' },
+        { title: 'Pastor Samuel\'s Sermon: Walking in Grace', url: 'https://www.youtube.com/watch?v=DXDGE_lRI0E', desc: 'A powerful message about God\'s grace in our daily lives' },
+        { title: 'Youth Conference 2025 Highlights', url: 'https://www.youtube.com/watch?v=Jbe7OruLk8I', desc: 'Best moments from the Kerala Youth Christian Conference' },
+        { title: 'Malayalam Worship Songs - Krupayude Daham', url: 'https://www.youtube.com/watch?v=WpmA9A-uXTo', desc: 'Beautiful Malayalam Christian worship song collection' },
+        { title: 'How to Study the Bible Effectively', url: 'https://www.youtube.com/watch?v=d_kX623qFDI', desc: 'Practical tips for daily Bible study from Rev. Thomas' },
+        { title: 'Testimony: From Darkness to Light', url: 'https://www.youtube.com/watch?v=n0FBb6hnwTo', desc: 'An incredible testimony of transformation and redemption' },
     ];
     for (let i = 0; i < videoData.length; i++) {
         const v = videoData[i];

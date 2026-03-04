@@ -20,13 +20,9 @@ const PublicObituaryPage: React.FC = () => {
                 <div className="text-center py-12 text-gray-400 dark:text-gray-500">No records</div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {items.map((item: any) => (
+                    {items.map((item: any, index: number) => (
                         <div key={item._id} className="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-100 dark:border-gray-700/50 p-5 text-center hover:shadow-lg dark:hover:shadow-black/30 transition-shadow">
-                            {item.photo ? (
-                                <img src={item.photo} alt={item.name} className="w-20 h-20 rounded-full mx-auto mb-3 object-cover" />
-                            ) : (
-                                <div className="w-20 h-20 rounded-full mx-auto mb-3 bg-gray-100 dark:bg-gray-700/40 flex items-center justify-center text-2xl text-gray-400 dark:text-gray-500">✝</div>
-                            )}
+                            <img src={item.photo || `/images/obituary-${(index % 4) + 1}.png`} alt={item.name} className="w-20 h-20 rounded-full mx-auto mb-3 object-cover" onError={(e) => { (e.target as HTMLImageElement).src = `/images/obituary-${(index % 4) + 1}.png`; }} />
                             <h3 className="font-bold text-gray-800 dark:text-white text-lg">{item.name}</h3>
                             <p className="text-sm text-gray-500 dark:text-gray-400">Age: {item.age}</p>
                             <p className="text-sm text-gray-500 dark:text-gray-400">{item.district}</p>

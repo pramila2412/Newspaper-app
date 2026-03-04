@@ -24,7 +24,9 @@ const PublicMatrimonyPage: React.FC = () => {
                     {items.map((item: any) => (
                         <div key={item._id} className="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-100 dark:border-gray-700/50 p-5 hover:shadow-lg dark:hover:shadow-black/30 transition-shadow">
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1CA7A6]/20 to-blue-100 dark:from-[#1CA7A6]/30 dark:to-purple-900/30 flex items-center justify-center text-xl font-bold text-[#0B3C5D] dark:text-[#1CA7A6]">{item.name.charAt(0)}</div>
+                                <div className="w-12 h-12 rounded-full overflow-hidden shrink-0">
+                                    <img src={item.photo || `/images/matrimony-${(items.indexOf(item) % 4) + 1}.png`} alt={item.name} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).src = `/images/matrimony-${(items.indexOf(item) % 4) + 1}.png`; }} />
+                                </div>
                                 <div>
                                     <h3 className="font-bold text-gray-800 dark:text-white">{item.name}</h3>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{item.age} years • {item.gender}</p>

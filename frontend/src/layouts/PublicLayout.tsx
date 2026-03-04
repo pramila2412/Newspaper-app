@@ -74,7 +74,7 @@ const navItems: NavItem[] = [
             { label: 'Submit Request', path: '/prayers?submit=true' },
         ],
     },
-    { label: 'CONTACT US', path: '/contact' },
+    { label: 'ABOUT US', path: '/about' },
 ];
 
 /* ─── Desktop dropdown nav item ─── */
@@ -186,12 +186,12 @@ const PublicLayout: React.FC = () => {
             {/* ═══════ LOGO HEADER ═══════ */}
             <header className="bg-white dark:bg-[#0F172A] border-b border-slate-100 dark:border-slate-700/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-5">
-                    <Link to="/" className="flex flex-col">
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-[#1CA7A6] text-3xl sm:text-4xl font-black italic leading-none">Online</span>
-                            <span className="text-gray-900 dark:text-white text-3xl sm:text-4xl font-black leading-none">Goodnews</span>
-                        </div>
-                        <span className="text-[10px] text-slate-400 dark:text-slate-500 tracking-[0.3em] uppercase font-medium mt-1">Christian News Portal</span>
+                    <Link to="/" className="flex items-center">
+                        <img
+                            src="/logo.png"
+                            alt="Online Goodnews"
+                            className="h-14 sm:h-16 w-auto object-contain"
+                        />
                     </Link>
 
                     {/* Right: Ad space or CTA */}
@@ -324,8 +324,11 @@ const PublicLayout: React.FC = () => {
                         {/* Brand */}
                         <div>
                             <div className="mb-4">
-                                <span className="text-[#1CA7A6] text-xl font-black italic">Online</span>
-                                <span className="text-white text-xl font-black ml-1">Goodnews</span>
+                                <img
+                                    src="/logo.png"
+                                    alt="Online Goodnews"
+                                    className="h-10 w-auto object-contain brightness-110"
+                                />
                             </div>
                             <p className="text-sm leading-relaxed text-gray-400">
                                 Spreading the Gospel and keeping the Malayalam Christian community informed through quality journalism and spiritual content.
@@ -349,13 +352,13 @@ const PublicLayout: React.FC = () => {
                             <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
                             <div className="space-y-2.5 text-sm">
                                 {[
-                                    { to: '/about', label: 'About Us' },
+                                    { to: '/contact', label: 'Contact Us' },
                                     { to: '/matrimony', label: 'Matrimony' },
                                     { to: '/obituary', label: 'Obituary' },
                                     { to: '/classifieds', label: 'Buy & Sell' },
                                     { to: '/videos', label: 'Videos' },
                                     { to: '/prayers', label: 'Praise & Prayers' },
-                                    { to: '/contact', label: 'Contact Us' },
+                                    { to: '/about', label: 'About Us' },
                                 ].map(l => (
                                     <Link key={l.to} to={l.to} className="block text-gray-400 hover:text-[#1CA7A6] hover:translate-x-1 transition-all">{l.label}</Link>
                                 ))}

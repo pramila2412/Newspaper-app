@@ -70,6 +70,7 @@ const HomePage: React.FC = () => {
     const [categoryNews, setCategoryNews] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [catLoading, setCatLoading] = useState(false);
+    const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
 
     useEffect(() => {
         Promise.all([
@@ -410,34 +411,54 @@ const HomePage: React.FC = () => {
                             </Link>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                            {videos.slice(0, 6).map((video: any) => (
-                                <a key={video._id} href={video.url} target="_blank" rel="noopener noreferrer" className="group bg-white dark:bg-[#1E293B] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-700/50">
-                                    <div className="relative overflow-hidden">
-                                        {video.thumbnail ? (
-                                            <img src={video.thumbnail} alt={video.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
-                                        ) : (
-                                            <div className="w-full h-48 bg-gradient-to-br from-purple-900 to-purple-600 flex items-center justify-center">
-                                                <HiOutlineFilm size={48} className="text-white/30" />
-                                            </div>
-                                        )}
-                                        {/* Play icon overlay */}
-                                        <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors">
-                                            <div className="w-14 h-14 rounded-full bg-white/90 dark:bg-white/80 flex items-center justify-center shadow-2xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all">
-                                                <HiOutlinePlay size={24} className="text-[#0B3C5D] ml-0.5" />
+                            {videos.slice(0, 6).map((video: any) => {
+                                const ytId = (video.youtubeUrl || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([^?&]+)/)?.[1] || '';
+                                const thumbUrl = ytId ? `https://img.youtube.com/vi/${ytId}/0.jpg` : '';
+                                const isPlaying = playingVideoId === video._id;
+
+                                return (
+                                    <div key={video._id} className="bg-white dark:bg-[#1E293B] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-700/50">
+                                        <div className="relative overflow-hidden aspect-video">
+                                            {isPlaying ? (
+                                                <iframe
+                                                    src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
+                                                    className="w-full h-full"
+                                                    allowFullScreen
+                                                    allow="autoplay"
+                                                />
+                                            ) : (
+                                                <button
+                                                    onClick={() => setPlayingVideoId(video._id)}
+                                                    className="w-full h-full relative group cursor-pointer text-left focus:outline-none"
+                                                >
+                                                    {thumbUrl ? (
+                                                        <img src={thumbUrl} alt={video.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                                                    ) : (
+                                                        <div className="w-full h-full bg-gradient-to-br from-purple-900 to-purple-600 flex items-center justify-center">
+                                                            <HiOutlineFilm size={48} className="text-white/30" />
+                                                        </div>
+                                                    )}
+                                                    {/* Play icon overlay */}
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors">
+                                                        <div className="w-14 h-14 rounded-full bg-white/90 dark:bg-white/80 flex items-center justify-center shadow-2xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all">
+                                                            <HiOutlinePlay size={24} className="text-[#0B3C5D] ml-0.5" />
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            )}
+                                        </div>
+                                        <div className="p-4">
+                                            <h3 className="font-bold text-slate-800 dark:text-white text-sm leading-snug group-hover:text-[#1CA7A6] transition-colors line-clamp-2 mb-2">
+                                                {video.title}
+                                            </h3>
+                                            <div className="flex items-center gap-2 text-[11px] text-slate-400">
+                                                <HiOutlineClock size={12} />
+                                                <span>{formatDate(video.createdAt)}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="p-4">
-                                        <h3 className="font-bold text-slate-800 dark:text-white text-sm leading-snug group-hover:text-[#1CA7A6] transition-colors line-clamp-2 mb-2">
-                                            {video.title}
-                                        </h3>
-                                        <div className="flex items-center gap-2 text-[11px] text-slate-400">
-                                            <HiOutlineClock size={12} />
-                                            <span>{formatDate(video.createdAt)}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
@@ -571,11 +592,11 @@ const HomePage: React.FC = () => {
                                 <Link key={o._id} to={`/obituary/${o._id}`} className="group bg-white dark:bg-[#1E293B] rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700/50 hover:shadow-lg dark:hover:shadow-black/20 transition-all duration-300 flex flex-col">
                                     {o.photo ? (
                                         <div className="overflow-hidden">
-                                            <img src={o.photo} alt={o.name} className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                                            <img src={o.photo} alt={o.name} className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = `/images/obituary-${(obituaries.indexOf(o) % 4) + 1}.png`; }} />
                                         </div>
                                     ) : (
-                                        <div className="w-full h-44 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
-                                            <span className="text-4xl text-slate-300 dark:text-slate-600">✝</span>
+                                        <div className="overflow-hidden">
+                                            <img src={`/images/obituary-${(obituaries.indexOf(o) % 4) + 1}.png`} alt={o.name} className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                                         </div>
                                     )}
                                     <div className="p-4 flex flex-col flex-1">

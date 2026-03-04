@@ -46,7 +46,7 @@ const ClassifiedsPage: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {items.map((item: any) => (
                         <div key={item._id} className="bg-white dark:bg-[#1E293B] rounded-xl border border-slate-200 dark:border-slate-700/50 overflow-hidden hover:shadow-lg dark:hover:shadow-black/20 transition-shadow">
-                            {item.images?.[0] && <img src={item.images[0]} alt={item.title} className="w-full h-48 object-cover" />}
+                            <img src={item.images?.[0] || '/images/classifieds-fallback.png'} alt={item.title} className="w-full h-48 object-cover" onError={(e) => { (e.target as HTMLImageElement).src = '/images/classifieds-fallback.png'; }} />
                             <div className="p-4">
                                 <h3 className="font-bold text-slate-800 dark:text-white mb-2">{item.title}</h3>
                                 <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-3">{item.description}</p>

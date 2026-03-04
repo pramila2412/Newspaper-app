@@ -43,7 +43,7 @@ const CategoryPage: React.FC = () => {
                         {news.map((article: any) => (
                             <Link key={article._id} to={`/article/${article.slug}`} className="group bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-100 dark:border-gray-700/50 overflow-hidden hover:shadow-lg dark:hover:shadow-black/30 transition-shadow">
                                 {article.heroImage ? (
-                                    <img src={article.heroImage} alt={article.title} className="w-full h-48 object-cover" loading="lazy" />
+                                    <img src={article.heroImage} alt={article.title} className="w-full h-48 object-cover" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                                 ) : (
                                     <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-[#1CA7A6]/10 dark:to-purple-900/20 flex items-center justify-center">
                                         <HiOutlineNewspaper size={48} className="text-gray-300 dark:text-gray-600" />
